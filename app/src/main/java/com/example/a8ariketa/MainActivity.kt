@@ -138,6 +138,7 @@ fun TxakurraInformazioa(
             text = "$adina urte",
             style = MaterialTheme.typography.bodyMedium
         )
+
         /*Text(
             text = deskribapena,
             style = MaterialTheme.typography.bodySmall
