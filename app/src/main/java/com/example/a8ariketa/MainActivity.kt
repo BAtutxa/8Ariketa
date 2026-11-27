@@ -24,13 +24,8 @@ import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.unit.*
-
-data class Txakurra(
-    val irudia: String,
-    val izena: String,
-    val adina: Int,
-    val deskribapena: String
-)
+import com.example.a8ariketa.data.Txakurra
+import com.example.a8ariketa.data.DatuakIrakurri
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,23 +43,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun kargatuTxakurrak(context: Context): List<Txakurra> {
-    return try {
-        val jsonString = context.assets.open("txakurrak.json")
-            .bufferedReader()
-            .use{it.readText()}
-        val listType = object : TypeToken<List<Txakurra>>() {}.type
-        Gson().fromJson(jsonString, listType)
-    } catch (e: Exception) {
-        e.printStackTrace()
-        emptyList()
-    }
-}
-
 @Composable
 fun TxakurrakAPP(modifier: Modifier = Modifier) {
     val context = LocalContext.current
-    val txakurZerrenda = remember { kargatuTxakurrak(context) }
+    val txakurZerrenda = remember { DatuakIrakurri().datuakKargatu(context) }
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -72,12 +54,7 @@ fun TxakurrakAPP(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(txakurZerrenda) { txakurra ->
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                TxakurraItem(txakurra = txakurra)
-            }
+            TxakurraItem(txakurra = txakurra)
         }
     }
 }
@@ -97,18 +74,23 @@ fun TxakurraItem(
         if (id != 0) id else R.drawable.ic_launcher_foreground
     }
 
-    Row(
+    Card(
         modifier = Modifier
-            .fillMaxWidth().padding(5.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ){
-        TxakurraIcon(txakurraIcon = imageResId)
-        Spacer(modifier=Modifier.width(10.dp))
-        TxakurraInformazioa(
-            izena = txakurra.izena,
-            adina = txakurra.adina,
-            deskribapena = txakurra.deskribapena
-        )
+            .fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth().padding(5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TxakurraIcon(txakurraIcon = imageResId)
+            Spacer(modifier = Modifier.width(10.dp))
+            TxakurraInformazioa(
+                izena = txakurra.izena,
+                adina = txakurra.adina,
+                deskribapena = txakurra.deskribapena
+            )
+        }
     }
 }
 
