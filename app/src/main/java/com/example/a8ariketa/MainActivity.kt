@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,8 +33,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val txakurrak = Datuak().datuakLortu(this)
-        setContent {
+        setContent{
             _8AriketaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     TxakurrakAPP(
@@ -54,7 +55,13 @@ fun TxakurrakAPP(modifier: Modifier = Modifier) {
 
 @Composable
 fun TxakurraItem(datua: Txakurra, modifier: Modifier = Modifier) {
-    Card(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+        )
+    ) {
         Row(modifier = Modifier.padding(8.dp)) {
             TxakurraIcon(datua)
             TxakurraInformazioa(datua)
@@ -76,10 +83,16 @@ fun TxakurraIcon(datua: Txakurra, modifier: Modifier = Modifier) {
 
 @Composable
 fun TxakurraInformazioa(datua: Txakurra, modifier: Modifier = Modifier) {
-    Column(modifier = Modifier.padding(start = 8.dp)) {
-        Text(text = datua.izena)
-        Text(text = "${datua.adina} urte")
-        Text(text = datua.deskribapena)
+    Column(modifier = modifier.padding(start = 8.dp)) {
+        Text(
+            text = "${datua.izena}/ ${datua.adina} urte",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+        Text(
+            text = datua.deskribapena,
+            style = MaterialTheme.typography.bodyMedium  // Aplica Hepta Slab
+        )
     }
 }
 
