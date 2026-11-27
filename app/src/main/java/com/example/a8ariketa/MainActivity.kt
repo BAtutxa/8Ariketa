@@ -23,6 +23,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -84,10 +85,14 @@ fun TxakurraItem(
     txakurra: Txakurra,
     modifier: Modifier = Modifier
 ) {
-    // ERTZ BIRIBILDUAK DITUEN TXARTELA
+
+// TXARTELAREN KOLORE BERRIA APLIKATU
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
     ) {
         // IRUDIA ETA INFORMAZIOA HORIZONTALEAN KOKATZEKO ERRENKADA (ROW)
         Row(
