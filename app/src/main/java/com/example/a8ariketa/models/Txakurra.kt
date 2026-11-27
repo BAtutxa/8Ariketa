@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Txakurra(
-    val irudia: String,
-    val izena: String,
-    val adina: Int,
-    val deskribapena: String
+    var irudia: Int = 0,
+    var izena: String = "",
+    var adina: Int = 0,
+    var deskribapena: String = ""
 )
