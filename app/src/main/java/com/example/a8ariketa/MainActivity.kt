@@ -72,7 +72,12 @@ fun TxakurrakAPP(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(txakurZerrenda) { txakurra ->
-            TxakurraItem(txakurra = txakurra)
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                TxakurraItem(txakurra = txakurra)
+            }
         }
     }
 }
@@ -94,11 +99,11 @@ fun TxakurraItem(
 
     Row(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth().padding(5.dp),
         verticalAlignment = Alignment.CenterVertically
     ){
         TxakurraIcon(txakurraIcon = imageResId)
-        Spacer(modifier=Modifier.width(16.dp))
+        Spacer(modifier=Modifier.width(10.dp))
         TxakurraInformazioa(
             izena = txakurra.izena,
             adina = txakurra.adina,
@@ -139,10 +144,10 @@ fun TxakurraInformazioa(
             style = MaterialTheme.typography.bodyMedium
         )
 
-        /*Text(
+        Text(
             text = deskribapena,
             style = MaterialTheme.typography.bodySmall
-        )*/
+        )
     }
 }
 
