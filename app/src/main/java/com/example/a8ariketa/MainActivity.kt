@@ -36,7 +36,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.a8ariketa.data.Txakurra
 import com.example.a8ariketa.data.irakurriTxakurrak
-// EGIAZTATU ZURE THEME.KT FITXATEGIKO IZEN BERA DELA
 import com.example.a8ariketa.ui.theme._8AriketaTheme
 
 // APLIKAZIOAREN JARDUERA NAGUSIA
@@ -57,14 +56,13 @@ class MainActivity : ComponentActivity() {
 // TXAKURREN ZERRENDA ERAKUSTEN DUEN FUNTZIO NAGUSIA
 @Composable
 fun TxakurrakAPP() {
-    // UNEKO TESTUINGURUA (CONTEXT) LORTU
     val context = LocalContext.current
     // JSON FITXATEGITIK TXAKURREN ZERRENDA KARGATU ETA MEMORIAN GORDE
     val txakurrak = remember { irakurriTxakurrak(context) }
 
     // PANTAILAREN EGITURA NAGUSIA (SCAFFOLD)
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        // ZERRENDA BERTIKAL OPTIMIZATUA (LAZYCOLUMN)
+        // ZERRENDA BERTIKALA (LAZYCOLUMN)
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
